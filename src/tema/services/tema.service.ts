@@ -11,7 +11,7 @@ export class TemaService {
   ) {}
 
   async findAll(): Promise<Tema[]> {
-    return await this.temaRepository.find();
+    return await this.temaRepository.find({ relations: { postagem: true } });
   }
 
   async findById(id: number): Promise<Tema> {
@@ -19,11 +19,18 @@ export class TemaService {
       where: {
         id,
       },
+      relations: { postagem: true },
     });
 
     if (!buscaTema)
       throw new HttpException(
         'O Tema não foi encontrado!',
+        HttpStatus.NOT_FOUND,
+      );
+
+    if (buscaTema.id === 3)
+      throw new HttpException(
+        'O Tema numero 3 não pode ser alterado!',
         HttpStatus.NOT_FOUND,
       );
 
@@ -35,6 +42,7 @@ export class TemaService {
       where: {
         descricao: ILike(`%${titulo}%`),
       },
+      relations: { postagem: true },
     });
   }
 
