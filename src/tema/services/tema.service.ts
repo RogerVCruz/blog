@@ -28,12 +28,6 @@ export class TemaService {
         HttpStatus.NOT_FOUND,
       );
 
-    if (buscaTema.id === 3)
-      throw new HttpException(
-        'O Tema numero 3 não pode ser alterado!',
-        HttpStatus.NOT_FOUND,
-      );
-
     return buscaTema;
   }
 
