@@ -11,7 +11,7 @@ async function bootstrap() {
     .setDescription('Projeto Blog Pessoal')
     .setContact(
       'Roger Seixas',
-      'http://www.generationbrasil.online',
+      'https://blogpessoal-ofo5.onrender.com',
       'rogervtsc@hotmail.com',
     )
     .setVersion('1.0')
