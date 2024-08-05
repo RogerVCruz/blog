@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-describe('Testes di Módulos Usuario e Auth (e2e)', () => {
+describe('Testes de Módulos Usuario e Auth (e2e)', () => {
   let app: INestApplication;
   let token: any;
   let usuarioId: any;
@@ -43,6 +43,7 @@ describe('Testes di Módulos Usuario e Auth (e2e)', () => {
       .expect(201);
 
     usuarioId = resposta.body.id;
+    console.log(usuarioId);
   });
 
   it('02 - Não Deve Cadastrar um Usuário Duplicado', async () => {
@@ -94,20 +95,11 @@ describe('Testes di Módulos Usuario e Auth (e2e)', () => {
       });
   });
 
-  it('06 - Deve Listar um Usuário por ID', async () => {
+  it('06 - Deve Listar Usuário pelo ID', async () => {
     return request(app.getHttpServer())
-      .put(`/usuarios/${usuarioId}`)
+      .get('/usuarios/' + `${usuarioId}`)
       .set('Authorization', `${token}`)
-      .send({
-        id: usuarioId,
-        nome: 'Root Atualizado',
-        usuario: 'root@root.com',
-        senha: 'rootroot',
-        foto: '',
-      })
-      .expect(200)
-      .then((resposta) => {
-        expect('Root Atualizado').toEqual(resposta.body.nome);
-      });
+      .send({})
+      .expect(200);
   });
 });
